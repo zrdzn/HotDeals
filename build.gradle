@@ -1,0 +1,35 @@
+plugins {
+    id "java"
+    id "com.github.johnrengelman.shadow" version "7.1.2"
+}
+
+group "io.github.zrdzn.bot"
+version "1.0.0"
+
+sourceCompatibility = JavaVersion.VERSION_16
+targetCompatibility = JavaVersion.VERSION_16
+
+repositories {
+    mavenCentral()
+
+    maven {
+        name "m2-dv8tion"
+        url "https://m2.dv8tion.net/releases/"
+    }
+}
+
+dependencies {
+    implementation "org.slf4j:slf4j-log4j12:1.7.36"
+
+    implementation("net.dv8tion:JDA:4.4.0_352") {
+        exclude module: 'opus-java'
+    }
+}
+
+shadowJar {
+    archiveFileName = "${archiveBaseName.get()}-v${archiveVersion.get()}.jar"
+
+    manifest {
+        attributes "Main-Class": "io.github.zrdzn.bot.hotdeals.HotDealsBot"
+    }
+}
