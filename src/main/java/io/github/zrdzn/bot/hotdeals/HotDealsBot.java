@@ -30,8 +30,8 @@ public class HotDealsBot {
         DealScraper scraper = new DealScraper(logger);
         try {
             scraper.scrape(DealSite.XKom);
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException exception) {
+            logger.error("Something went wrong while scraping website.", exception);
         }
     }
 
