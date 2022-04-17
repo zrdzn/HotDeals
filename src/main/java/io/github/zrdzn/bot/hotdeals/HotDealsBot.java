@@ -29,7 +29,7 @@ public class HotDealsBot {
 
         DealScraper scraper = new DealScraper(logger);
         try {
-            scraper.scrap(DealSite.XKom);
+            scraper.scrape(DealSite.XKom);
         } catch (IOException e) {
             e.printStackTrace();
         }

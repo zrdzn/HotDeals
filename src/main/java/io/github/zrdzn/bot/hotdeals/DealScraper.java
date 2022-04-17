@@ -15,7 +15,7 @@ public class DealScraper {
         this.logger = logger;
     }
 
-    public Optional<Deal> scrap(DealSite site) throws IOException {
+    public Optional<Deal> scrape(DealSite site) throws IOException {
         String url;
         String name;
         double originalPrice;
