@@ -15,13 +15,17 @@
  */
 package io.github.zrdzn.bot.hotdeals;
 
+import io.github.zrdzn.bot.hotdeals.command.CommandListener;
+import io.github.zrdzn.bot.hotdeals.command.CommandRegistry;
+import io.github.zrdzn.bot.hotdeals.command.commands.HelpCommand;
+import io.github.zrdzn.bot.hotdeals.command.commands.SetRoleCommand;
+import io.github.zrdzn.bot.hotdeals.command.commands.StartTaskCommand;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.internal.utils.JDALogger;
 import org.apache.log4j.BasicConfigurator;
 import org.slf4j.Logger;
 
 import javax.security.auth.login.LoginException;
-import java.io.IOException;
 
 public class HotDealsBot {
 
@@ -40,14 +44,13 @@ public class HotDealsBot {
         BasicConfigurator.configure();
         Logger logger = JDALogger.getLog("DISCORD-BOT");
 
-        jdaBuilder.build();
+        CommandRegistry commandRegistry = new CommandRegistry();
 
-        DealScraper scraper = new DealScraper(logger);
-        try {
-            scraper.scrape(DealSite.XKom);
-        } catch (IOException exception) {
-            logger.error("Something went wrong while scraping website.", exception);
-        }
+        commandRegistry.register(new HelpCommand(logger, commandRegistry));
+        commandRegistry.register(new SetRoleCommand(logger, commandRegistry));
+        commandRegistry.register(new StartTaskCommand(logger, commandRegistry));
+
+        jdaBuilder.addEventListeners(new CommandListener(commandRegistry)).build();
     }
 
 }
