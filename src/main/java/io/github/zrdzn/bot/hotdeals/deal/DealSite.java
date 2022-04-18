@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.github.zrdzn.bot.hotdeals;
+package io.github.zrdzn.bot.hotdeals.deal;
 
 public enum DealSite {
 
