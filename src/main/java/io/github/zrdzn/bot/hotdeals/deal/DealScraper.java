@@ -17,18 +17,11 @@ package io.github.zrdzn.bot.hotdeals.deal;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.slf4j.Logger;
 
 import java.io.IOException;
 import java.util.Optional;
 
 public class DealScraper {
-
-    private final Logger logger;
-
-    public DealScraper(Logger logger) {
-        this.logger = logger;
-    }
 
     public Optional<Deal> scrape(DealSite site) throws IOException {
         String url;
@@ -40,9 +33,13 @@ public class DealScraper {
 
         if (site == DealSite.XKom) {
             url = document.select("link[rel='canonical']").attr("href");
-            name = document.select("h1.PFbyR").text();
+
+            String nameRaw = document.select("title").text();
+            name = nameRaw.substring(15, nameRaw.length() - 11);
+
             originalPrice = this.parsePrice(document.select("span.kqfbmY").text());
-            discountedPrice = this.parsePrice(document.select("span.iiwFoN").text());
+
+            discountedPrice = this.parsePrice(document.select("span.fZcVAs").text());
 
             return Optional.of(new XKomDeal(url, name, originalPrice, discountedPrice));
         }

@@ -27,28 +27,28 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
-public class SetRoleCommand extends BaseCommand {
+public class SetChannelCommand extends BaseCommand {
 
     private final Configuration configuration;
 
-    public SetRoleCommand(Logger logger, CommandRegistry registry, Configuration configuration) {
+    public SetChannelCommand(Logger logger, CommandRegistry registry, Configuration configuration) {
         super(logger, registry);
         this.configuration = configuration;
     }
 
     @Override
     public String getName() {
-        return "set-role";
+        return "set-channel";
     }
 
     @Override
     public Optional<String> getDescription() {
-        return Optional.of("Sets role with specified id that can control tasks.");
+        return Optional.of("Sets channel with specified id that will receive all deals.");
     }
 
     @Override
     public Optional<String> getUsage() {
-        return Optional.of("!set-role <role-id>");
+        return Optional.of("!set-channel <channel-id>");
     }
 
     @Override
@@ -60,9 +60,9 @@ public class SetRoleCommand extends BaseCommand {
             return;
         }
 
-        long roleId;
+        long channelId;
         try {
-            roleId = Long.parseLong(optionList.get(0));
+            channelId = Long.parseLong(optionList.get(0));
         } catch (NumberFormatException exception) {
             channel.sendMessage("Provided id is not valid id (long type).").queue();
             return;
@@ -78,13 +78,13 @@ public class SetRoleCommand extends BaseCommand {
                 logger.info("Directory 'data' already exist, no need to create a new one.");
             }
 
-            FileWriter myWriter = new FileWriter("data/role-id");
-            myWriter.write(String.valueOf(roleId));
+            FileWriter myWriter = new FileWriter("data/channel-id");
+            myWriter.write(String.valueOf(channelId));
             myWriter.close();
-            this.configuration.setControllerRoleId(roleId);
-            channel.sendMessage("Successfully saved new role id.").queue();
+            this.configuration.setDealChannelId(channelId);
+            channel.sendMessage("Successfully saved new channel id.").queue();
         } catch (IOException exception) {
-            this.getLogger().error("Could not save file with role id.", exception);
+            this.getLogger().error("Could not save file with channel id.", exception);
         }
 
     }

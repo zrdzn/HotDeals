@@ -18,8 +18,15 @@ package io.github.zrdzn.bot.hotdeals;
 import io.github.zrdzn.bot.hotdeals.command.CommandListener;
 import io.github.zrdzn.bot.hotdeals.command.CommandRegistry;
 import io.github.zrdzn.bot.hotdeals.command.commands.HelpCommand;
+import io.github.zrdzn.bot.hotdeals.command.commands.SetChannelCommand;
 import io.github.zrdzn.bot.hotdeals.command.commands.SetRoleCommand;
 import io.github.zrdzn.bot.hotdeals.command.commands.StartTaskCommand;
+import io.github.zrdzn.bot.hotdeals.command.commands.StopTaskCommand;
+import io.github.zrdzn.bot.hotdeals.configuration.Configuration;
+import io.github.zrdzn.bot.hotdeals.configuration.ConfigurationLoader;
+import io.github.zrdzn.bot.hotdeals.deal.DealScraper;
+import io.github.zrdzn.bot.hotdeals.deal.DealScraperTask;
+import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.internal.utils.JDALogger;
 import org.apache.log4j.BasicConfigurator;
@@ -44,13 +51,22 @@ public class HotDealsBot {
         BasicConfigurator.configure();
         Logger logger = JDALogger.getLog("DISCORD-BOT");
 
+        Configuration configuration = new ConfigurationLoader(logger).load().orElseThrow(IllegalStateException::new);
+
+        DealScraper scraper = new DealScraper();
+
+        DealScraperTask task = new DealScraperTask(logger, configuration, scraper);
+
         CommandRegistry commandRegistry = new CommandRegistry();
 
         commandRegistry.register(new HelpCommand(logger, commandRegistry));
-        commandRegistry.register(new SetRoleCommand(logger, commandRegistry));
-        commandRegistry.register(new StartTaskCommand(logger, commandRegistry));
+        commandRegistry.register(new SetRoleCommand(logger, commandRegistry, configuration));
+        commandRegistry.register(new SetChannelCommand(logger, commandRegistry, configuration));
+        commandRegistry.register(new StartTaskCommand(logger, commandRegistry, configuration, task));
+        commandRegistry.register(new StopTaskCommand(logger, commandRegistry, configuration, task));
 
-        jdaBuilder.addEventListeners(new CommandListener(commandRegistry)).build();
+        JDA jda = jdaBuilder.addEventListeners(new CommandListener(commandRegistry)).build();
+        task.setJda(jda);
     }
 
 }
