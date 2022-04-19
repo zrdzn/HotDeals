@@ -1,5 +1,7 @@
 # HotDeals
 Simple discord bot that fetches hot deals ("gorące strzały") from [x-kom](https://x-kom.pl). You can configure how often should bot check for a new deal through task commands.
+
+![1](img/preview.png)
 ## Commands
 `+set-channel <id>` - Sets where the deals should appear. (**REQUIRED**)\
 `+set-role <id>` - Sets the controller role, everyone with this role can start and stop repeating tasks. (**REQUIRED**)\
