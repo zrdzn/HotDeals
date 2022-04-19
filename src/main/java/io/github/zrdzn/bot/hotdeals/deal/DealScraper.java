@@ -43,7 +43,9 @@ public class DealScraper {
 
             discountedPrice = this.parsePrice(originalPriceRaw.nextElementSibling().text());
 
-            return Optional.of(new XKomDeal(url, name, originalPrice, discountedPrice));
+            String imageUrl = document.selectFirst("div.col-md-10 img").attr("src");
+
+            return Optional.of(new XKomDeal(url, name, originalPrice, discountedPrice, imageUrl));
         }
 
         return Optional.empty();

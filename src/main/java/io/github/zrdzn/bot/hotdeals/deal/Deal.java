@@ -25,4 +25,6 @@ public interface Deal {
 
     double getDiscountedPrice();
 
+    String getImageUrl();
+
 }

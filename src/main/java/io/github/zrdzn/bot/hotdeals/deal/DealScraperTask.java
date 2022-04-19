@@ -88,7 +88,9 @@ public class DealScraperTask implements Runnable {
                 .addField("Product name", deal.getName(), false)
                 .addField("Original price", String.valueOf(deal.getOriginalPrice()), true)
                 .addField("Discounted price", String.valueOf(deal.getDiscountedPrice()), true)
-                .addField("Link", deal.getUrl(), false)
+                .addField("Discount link", site.getUrl(), false)
+                .addField("Original link", deal.getUrl(), false)
+                .setThumbnail(deal.getImageUrl())
                 .setColor(Color.CYAN)
                 .build();
 

@@ -21,12 +21,14 @@ public class XKomDeal implements Deal {
     private final String name;
     private final double originalPrice;
     private final double discountedPrice;
+    private final String imageUrl;
 
-    public XKomDeal(String url, String name, double originalPrice, double discountedPrice) {
+    public XKomDeal(String url, String name, double originalPrice, double discountedPrice, String imageUrl) {
         this.url = url;
         this.name = name;
         this.originalPrice = originalPrice;
         this.discountedPrice = discountedPrice;
+        this.imageUrl = imageUrl;
     }
 
     @Override
@@ -47,6 +49,11 @@ public class XKomDeal implements Deal {
     @Override
     public double getDiscountedPrice() {
         return this.discountedPrice;
+    }
+
+    @Override
+    public String getImageUrl() {
+        return this.imageUrl;
     }
 
 }
