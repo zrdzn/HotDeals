@@ -35,10 +35,10 @@ public class DealScraper {
         if (site == DealSite.XKom) {
             url = document.select("link[rel='canonical']").attr("href");
 
-            String nameRaw = document.select("title").text();
+            String nameRaw = document.title();
             name = nameRaw.substring(15, nameRaw.length() - 11);
 
-            Element originalPriceRaw = document.select("span.kqfbmY").first();
+            Element originalPriceRaw = document.selectFirst("span.kqfbmY");
             originalPrice = this.parsePrice(originalPriceRaw.text());
 
             discountedPrice = this.parsePrice(originalPriceRaw.nextElementSibling().text());
