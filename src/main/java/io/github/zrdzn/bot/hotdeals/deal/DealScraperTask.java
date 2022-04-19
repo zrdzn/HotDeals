@@ -24,6 +24,7 @@ import org.slf4j.Logger;
 
 import java.awt.Color;
 import java.io.IOException;
+import java.time.Instant;
 import java.util.Optional;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -91,6 +92,7 @@ public class DealScraperTask implements Runnable {
                 .addField("Discount link", site.getUrl(), false)
                 .addField("Original link", deal.getUrl(), false)
                 .setThumbnail(deal.getImageUrl())
+                .setTimestamp(Instant.now())
                 .setColor(Color.CYAN)
                 .build();
 
