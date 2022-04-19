@@ -17,6 +17,7 @@ package io.github.zrdzn.bot.hotdeals.deal;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 
 import java.io.IOException;
 import java.util.Optional;
@@ -37,9 +38,10 @@ public class DealScraper {
             String nameRaw = document.select("title").text();
             name = nameRaw.substring(15, nameRaw.length() - 11);
 
-            originalPrice = this.parsePrice(document.select("span.kqfbmY").text());
+            Element originalPriceRaw = document.select("span.kqfbmY").first();
+            originalPrice = this.parsePrice(originalPriceRaw.text());
 
-            discountedPrice = this.parsePrice(document.select("span.fZcVAs").text());
+            discountedPrice = this.parsePrice(originalPriceRaw.nextElementSibling().text());
 
             return Optional.of(new XKomDeal(url, name, originalPrice, discountedPrice));
         }
