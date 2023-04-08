@@ -17,11 +17,11 @@ package io.github.zrdzn.bot.hotdeals;
 
 import io.github.zrdzn.bot.hotdeals.command.CommandListener;
 import io.github.zrdzn.bot.hotdeals.command.CommandRegistry;
-import io.github.zrdzn.bot.hotdeals.command.commands.HelpCommand;
-import io.github.zrdzn.bot.hotdeals.command.commands.SetChannelCommand;
-import io.github.zrdzn.bot.hotdeals.command.commands.SetRoleCommand;
-import io.github.zrdzn.bot.hotdeals.command.commands.StartTaskCommand;
-import io.github.zrdzn.bot.hotdeals.command.commands.StopTaskCommand;
+import io.github.zrdzn.bot.hotdeals.command.HelpCommand;
+import io.github.zrdzn.bot.hotdeals.command.SetChannelCommand;
+import io.github.zrdzn.bot.hotdeals.command.SetRoleCommand;
+import io.github.zrdzn.bot.hotdeals.command.StartTaskCommand;
+import io.github.zrdzn.bot.hotdeals.command.StopTaskCommand;
 import io.github.zrdzn.bot.hotdeals.configuration.Configuration;
 import io.github.zrdzn.bot.hotdeals.configuration.ConfigurationLoader;
 import io.github.zrdzn.bot.hotdeals.deal.DealScraper;

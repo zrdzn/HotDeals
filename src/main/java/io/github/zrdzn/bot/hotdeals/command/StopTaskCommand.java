@@ -13,9 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.github.zrdzn.bot.hotdeals.command.commands;
+package io.github.zrdzn.bot.hotdeals.command;
 
-import io.github.zrdzn.bot.hotdeals.command.CommandRegistry;
 import io.github.zrdzn.bot.hotdeals.configuration.Configuration;
 import io.github.zrdzn.bot.hotdeals.deal.DealScraperTask;
 import net.dv8tion.jda.api.entities.MessageChannel;
@@ -25,12 +24,12 @@ import org.slf4j.Logger;
 import java.util.List;
 import java.util.Optional;
 
-public class StartTaskCommand extends BaseCommand {
+public class StopTaskCommand extends BaseCommand {
 
     private final Configuration configuration;
     private final DealScraperTask task;
 
-    public StartTaskCommand(Logger logger, CommandRegistry registry, Configuration configuration, DealScraperTask task) {
+    public StopTaskCommand(Logger logger, CommandRegistry registry, Configuration configuration, DealScraperTask task) {
         super(logger, registry);
         this.configuration = configuration;
         this.task = task;
@@ -38,17 +37,12 @@ public class StartTaskCommand extends BaseCommand {
 
     @Override
     public String getName() {
-        return "start-task";
+        return "stop-task";
     }
 
     @Override
     public Optional<String> getDescription() {
-        return Optional.of("Starts scrape repeating task for all websites.");
-    }
-
-    @Override
-    public Optional<String> getUsage() {
-        return Optional.of("!start-task [period]");
+        return Optional.of("Stops scrape repeating task for all websites.");
     }
 
     @Override
@@ -61,20 +55,8 @@ public class StartTaskCommand extends BaseCommand {
             return;
         }
 
-        if (optionList.isEmpty()) {
-            this.task.start(30L);
-        } else {
-            long period;
-            try {
-                period = Long.parseLong(optionList.get(0));
-            } catch (NumberFormatException exception) {
-                period = DealScraperTask.DEFAULT_PERIOD;
-            }
-
-            this.task.start(period);
-        }
-
-        channel.sendMessage("Task successfully started.").queue();
+        this.task.stop();
+        channel.sendMessage("Task successfully stopped.").queue();
     }
 
 }

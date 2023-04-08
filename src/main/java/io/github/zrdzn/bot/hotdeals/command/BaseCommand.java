@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.github.zrdzn.bot.hotdeals.command.commands;
+package io.github.zrdzn.bot.hotdeals.command;
 
 import io.github.zrdzn.bot.hotdeals.command.Command;
 import io.github.zrdzn.bot.hotdeals.command.CommandRegistry;

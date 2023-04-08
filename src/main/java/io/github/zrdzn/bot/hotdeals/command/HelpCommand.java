@@ -13,9 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.github.zrdzn.bot.hotdeals.command.commands;
+package io.github.zrdzn.bot.hotdeals.command;
 
-import io.github.zrdzn.bot.hotdeals.command.CommandRegistry;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import org.slf4j.Logger;
