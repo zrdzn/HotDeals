@@ -9,7 +9,7 @@ Simple discord bot that fetches hot deals ("gorące strzały") from [x-kom](http
 `+start-task [period]` - Starts task with optional period, if none is specified - it will use a default one (15 minutes).
 `+stop-task` - Stops the task that is already running.
 ## Installation
-First, download latest .jar from [releases](https://github.com/zrdzn/FlameRegions/releases) tab, then run it by providing your
+First, download latest .jar from [releases](https://github.com/zrdzn/HotDeals/releases) tab, then run it by providing your
 bot token as a program argument. For instance:
 ```BASH
 java -Xms16M -Xmx128M -jar HotDeals-v1.0.0.jar TOKEN
